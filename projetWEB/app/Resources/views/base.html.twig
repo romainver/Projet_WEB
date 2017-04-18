@@ -1,13 +1,53 @@
+{# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta charset="UTF-8">
+        <title>{% block title %}Exia BDE Toulouse{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% block header %}
+    <nav class="navbar navbar-default .navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+             <a class="navbar-brand" href="#">BDE Exia</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="active"><a href="/home">Page d'acceuil</a></li>
+           <li><a href="/activities">Activitées</a></li>
+            <li><a href="/clubs">Clubs</a></li>
+           <li><a href="/profile">Profil</a></li>
+         <li class=".navbar-right" onclick="afficherFormulaire()"><a href="/profile">Se connecter</a></li>
+           </ul>
+        </div>
+        </nav>
+    <form id = "formulaireConnection">
+        <p>
+       <label for="pseudo">Votre pseudo :</label>
+       <input type="text" name="pseudo" id="pseudo" />
+       
+       <br />
+       <label for="pass">Votre mot de passe :</label>
+       <input type="password" name="pass" id="pass" />
+       
+   </p>
+    </form>
+        {% endblock %}
+        {% block sidebar %}
+
+        {% endblock %}
+        </div>
+        <div id="content">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}
+<h1>footer de base</h1>
+            {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('main.js') }}"></script>
+        {% endblock %}
     </body>
-</html>
