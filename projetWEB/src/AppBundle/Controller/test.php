@@ -7,12 +7,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class home extends Controller
+class test extends Controller
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/test", name="test")
      */
-    public function homeAction()
+    public function profileAction()
     {
         return $this->render('test.html.twig');
     }

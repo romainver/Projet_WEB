@@ -1,0 +1,19 @@
+{# app/Resources/views/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Exia BDE Toulouse{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <form method="post" action="users">
+   <label for="email">Votre Email :</label>
+   <input type="text" name="email" id="email" />
+   <br />
+   <label for="pass">Votre mot de passe :</label>
+   <input type="password" name="pass" id="pass" />
+   <br>
+   <input type="submit" value="Envoyer">
+ </form>
+</body>
