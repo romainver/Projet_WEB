@@ -1,0 +1,152 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+Create database bddprojetweb;
+USE bddprojetweb;
+
+#------------------------------------------------------------
+# Table: Utilisateur
+#------------------------------------------------------------
+
+CREATE TABLE Utilisateur(
+        IdUtilisateur int (11) Auto_increment  NOT NULL ,
+        Nom           Varchar (25) ,
+        Prenom        Varchar (25) ,
+        Age           Int ,
+        Promotion     Varchar (25) ,
+        PhraseChoc    Varchar (25) ,
+        Avatar        Varchar (25) ,
+        Email         Varchar (25) ,
+        Motdepasse    Varchar (25) ,
+        Categorie     Varchar (25) ,
+        PRIMARY KEY (IdUtilisateur )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Activite
+#------------------------------------------------------------
+
+CREATE TABLE Activite(
+        IdActivite   int (11) Auto_increment  NOT NULL ,
+        NomActivite  Varchar (25) ,
+        Description  Text ,
+        DateActivite Date ,
+        VotePour     Int ,
+        VoteContre   Int ,
+        IdVoteHeure  Int ,
+        PRIMARY KEY (IdActivite )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Photo
+#------------------------------------------------------------
+
+CREATE TABLE Photo(
+        IdPhoto    int (11) Auto_increment  NOT NULL ,
+        LikePhoto  Int ,
+        IdActivite Int ,
+        PRIMARY KEY (IdPhoto )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Commentaires
+#------------------------------------------------------------
+
+CREATE TABLE Commentaires(
+        IdCommentaire   int (11) Auto_increment  NOT NULL ,
+        Commentaire     Text ,
+        DateCommentaire Date ,
+        IdPhoto         Int ,
+        IdUtilisateur   Int ,
+        PRIMARY KEY (IdCommentaire )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Club
+#------------------------------------------------------------
+
+CREATE TABLE Club(
+        IdClub            int (11) Auto_increment  NOT NULL ,
+        NomClub           Varchar (25) ,
+        DescriptionCourte Varchar (25) ,
+        DescriptionLongue Text ,
+        PhotoClub         Varchar (25) ,
+        BudgetClub        Int ,
+        PRIMARY KEY (IdClub )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Goodies
+#------------------------------------------------------------
+
+CREATE TABLE Goodies(
+        IdGoodies    int (11) Auto_increment  NOT NULL ,
+        NomGoodies   Varchar (25) ,
+        PrixGoodies  Int ,
+        StockGoodies Int ,
+        PRIMARY KEY (IdGoodies )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: VoteHeure
+#------------------------------------------------------------
+
+CREATE TABLE VoteHeure(
+        IdVoteHeure int (11) Auto_increment  NOT NULL ,
+        Proposition Varchar (25) ,
+        IdActivite  Int ,
+        PRIMARY KEY (IdVoteHeure )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Participe
+#------------------------------------------------------------
+
+CREATE TABLE Participe(
+        IdUtilisateur Int NOT NULL ,
+        IdActivite    Int NOT NULL ,
+        PRIMARY KEY (IdUtilisateur ,IdActivite )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Appartient
+#------------------------------------------------------------
+
+CREATE TABLE Appartient(
+        Role          Varchar (25) ,
+        IdClub        Int NOT NULL ,
+        IdUtilisateur Int NOT NULL ,
+        PRIMARY KEY (IdClub ,IdUtilisateur )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Propose
+#------------------------------------------------------------
+
+CREATE TABLE Propose(
+        IdClub     Int NOT NULL ,
+        IdActivite Int NOT NULL ,
+        PRIMARY KEY (IdClub ,IdActivite )
+)ENGINE=InnoDB;
+
+ALTER TABLE Activite ADD CONSTRAINT FK_Activite_IdVoteHeure FOREIGN KEY (IdVoteHeure) REFERENCES VoteHeure(IdVoteHeure);
+ALTER TABLE Photo ADD CONSTRAINT FK_Photo_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
+ALTER TABLE Commentaires ADD CONSTRAINT FK_Commentaires_IdPhoto FOREIGN KEY (IdPhoto) REFERENCES Photo(IdPhoto);
+ALTER TABLE Commentaires ADD CONSTRAINT FK_Commentaires_IdUtilisateur FOREIGN KEY (IdUtilisateur) REFERENCES Utilisateur(IdUtilisateur);
+ALTER TABLE VoteHeure ADD CONSTRAINT FK_VoteHeure_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
+ALTER TABLE Participe ADD CONSTRAINT FK_Participe_IdUtilisateur FOREIGN KEY (IdUtilisateur) REFERENCES Utilisateur(IdUtilisateur);
+ALTER TABLE Participe ADD CONSTRAINT FK_Participe_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
+ALTER TABLE Appartient ADD CONSTRAINT FK_Appartient_IdClub FOREIGN KEY (IdClub) REFERENCES Club(IdClub);
+ALTER TABLE Appartient ADD CONSTRAINT FK_Appartient_IdUtilisateur FOREIGN KEY (IdUtilisateur) REFERENCES Utilisateur(IdUtilisateur);
+ALTER TABLE Propose ADD CONSTRAINT FK_Propose_IdClub FOREIGN KEY (IdClub) REFERENCES Club(IdClub);
+ALTER TABLE Propose ADD CONSTRAINT FK_Propose_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
