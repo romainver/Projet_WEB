@@ -13,11 +13,13 @@ CREATE TABLE Utilisateur(
         IdUtilisateur int (11) Auto_increment  NOT NULL ,
         Nom           Varchar (25) ,
         Prenom        Varchar (25) ,
+        Age           Int ,
+        Promotion     Varchar (25) ,
+        PhraseChoc    Varchar (25) ,
+        Avatar        Varchar (25) ,
         Email         Varchar (25) ,
         Motdepasse    Varchar (25) ,
         Categorie     Varchar (25) ,
-        PhraseChoc    Varchar (25) ,
-        Avatar        Varchar (25) ,
         PRIMARY KEY (IdUtilisateur )
 )ENGINE=InnoDB;
 
@@ -33,6 +35,7 @@ CREATE TABLE Activite(
         DateActivite Date ,
         VotePour     Int ,
         VoteContre   Int ,
+        IdVoteHeure  Int ,
         PRIMARY KEY (IdActivite )
 )ENGINE=InnoDB;
 
@@ -73,6 +76,7 @@ CREATE TABLE Club(
         DescriptionCourte Varchar (25) ,
         DescriptionLongue Text ,
         PhotoClub         Varchar (25) ,
+        BudgetClub        Int ,
         PRIMARY KEY (IdClub )
 )ENGINE=InnoDB;
 
@@ -87,6 +91,18 @@ CREATE TABLE Goodies(
         PrixGoodies  Int ,
         StockGoodies Int ,
         PRIMARY KEY (IdGoodies )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: VoteHeure
+#------------------------------------------------------------
+
+CREATE TABLE VoteHeure(
+        IdVoteHeure int (11) Auto_increment  NOT NULL ,
+        Proposition Varchar (25) ,
+        IdActivite  Int ,
+        PRIMARY KEY (IdVoteHeure )
 )ENGINE=InnoDB;
 
 
@@ -123,9 +139,11 @@ CREATE TABLE Propose(
         PRIMARY KEY (IdClub ,IdActivite )
 )ENGINE=InnoDB;
 
+ALTER TABLE Activite ADD CONSTRAINT FK_Activite_IdVoteHeure FOREIGN KEY (IdVoteHeure) REFERENCES VoteHeure(IdVoteHeure);
 ALTER TABLE Photo ADD CONSTRAINT FK_Photo_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
 ALTER TABLE Commentaires ADD CONSTRAINT FK_Commentaires_IdPhoto FOREIGN KEY (IdPhoto) REFERENCES Photo(IdPhoto);
 ALTER TABLE Commentaires ADD CONSTRAINT FK_Commentaires_IdUtilisateur FOREIGN KEY (IdUtilisateur) REFERENCES Utilisateur(IdUtilisateur);
+ALTER TABLE VoteHeure ADD CONSTRAINT FK_VoteHeure_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
 ALTER TABLE Participe ADD CONSTRAINT FK_Participe_IdUtilisateur FOREIGN KEY (IdUtilisateur) REFERENCES Utilisateur(IdUtilisateur);
 ALTER TABLE Participe ADD CONSTRAINT FK_Participe_IdActivite FOREIGN KEY (IdActivite) REFERENCES Activite(IdActivite);
 ALTER TABLE Appartient ADD CONSTRAINT FK_Appartient_IdClub FOREIGN KEY (IdClub) REFERENCES Club(IdClub);
