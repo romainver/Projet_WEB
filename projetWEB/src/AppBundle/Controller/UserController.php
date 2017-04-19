@@ -36,9 +36,8 @@ class UserController extends Controller
 
     /**
      * @Route("/register", name="registration")
-     * @Method({"GET"})
      */
-    public function newAccount()
+    public function newAccount(Request $request)
     {
       $user = new User();
       $form = $this->createFormBuilder($user)
@@ -49,13 +48,27 @@ class UserController extends Controller
       ->add('Phrasechoc', TextType::class)
       ->add('Avatar', TextType::class)
       ->add('Email', TextType::class)
+      ->add('Motdepasse', TextType::class)
+      ->add('Categorie', TextType::class)
       ->add('save', SubmitType::class, array('label' => 'Creer un compte'))
       ->getForm();
-     
+      $form->handleRequest($request);
+      if($form->isSubmitted() && $form->isValid())
+      {
+         $task = $form->getData();
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($task);
+         $em->flush();
+        return $this->redirectToRoute('home'); 
+      }
 
       return $this->render('test.html.twig', array(
         'form' => $form->createView(),
-        ));
-}
+        )); 
+    }
+
+
+    
       
-  }
+}
+

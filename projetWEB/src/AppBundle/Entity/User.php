@@ -58,7 +58,7 @@ class User
     /**
      * @ORM\Column(type="string")
      */
-
+    protected $Categorie;
 
     public function getIdUtilisateur()
     {
@@ -85,7 +85,7 @@ class User
         return $this->Prenom;
     }
 
-    public function setPrenom($Nom)
+    public function setPrenom($Prenom)
     {
         $this->Prenom = $Prenom;
     }
@@ -148,6 +148,16 @@ class User
     public function setMotdepasse($Motdepasse)
     {
         $this->Motdepasse = $Motdepasse;
+    }
+
+    public function getCategorie()
+    {
+        return $this->Categorie;
+    }
+
+    public function setCategorie($Categorie)
+    {
+        $this->Categorie = $Categorie;
     }
 
     
