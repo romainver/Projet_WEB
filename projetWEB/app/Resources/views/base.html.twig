@@ -1,13 +1,144 @@
+{# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Cesi BDE Toulouse{% endblock %}</title>
+  {% block stylesheets %}
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  {% endblock %}
+    
+</head>
+<body>
+
+
+  {% block header %}
+  <nav class="navbar navbar-danger" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> <img src="http://www.cesi.fr/_uploads/images/M%C3%A9dias%20portail.cesi/bloc1/logo-groupeCesi.png" alt="Logo_page" title="Accueil" id="logo"/>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex2-collapse">
+    <ul class="nav navbar-nav" id ='navbartop'>
+        <li class="active"><a href="#">Accueil</a></li>
+        <li class="dropdown activite">
+          <a href="#" class="dropdown-toggle1" data-toggle="dropdown">
+            Mes activités <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-danger">
+            <li><a href="#">Activité 1</a></li>
+            <li><a href="#">Activité 2</a></li>
+            <li><a href="#">Activité 3</a></li>
+          </ul>
+        </li>
+        <li class="dropdown club">
+          <a href="#" class="dropdown-toggle1" data-toggle="dropdown">
+            Mes clubs <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-danger">
+            <li><a href="#">Club 1</a></li>
+            <li><a href="#">Club 2</a></li>
+            <li><a href="#">Club 3</a></li>
+          </ul>
+        </li>
+        <li class="active"><a href="#">Boutique</a></li>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" class="navbar-link">Se connecter</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{# block formulaireConnexion #}
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+
+<form id = "formulaireConnection">
+  <p>
+   <label for="pseudo">Votre pseudo :</label>
+   <input type="text" name="pseudo" id="pseudo" value='Votre pseudo' onFocus="if (this.value=='Votre pseudo') {this.value=''}"/>
+
+   <br />
+   <label for="pass">Votre mot de passe :</label>
+   <input type="password" name="pass" id="pass" />
+
+ </p>
+</form>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+{# endblock #}
+
+
+  </div>
+</div>
+<div id="content">
+</div>
+
+
+{% block footer %}
+<div id="footer">
+  <footer id="myFooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <h5>C'est parti</h5>
+          <ul>
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="#">Connexion</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h5>A propos de nous</h5>
+          <ul>
+            <li><a href="#">Le Cesi ?</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <div class="social-networks">
+            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Here we use the Google Embed API to show Google Maps. -->
+      <!-- In order for this to work in your project you will need to generate a unique API key.  -->
+      <iframe id="map-container" frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB9Nav2oyIkSDRbaJDqEqGdi0DkrR9oKcs&q=Campus+Cesi+Toulouse" >
+    </iframe>
+  </div>
+  
+  <div class="footer-copyright">
+    <p>© 2017 Copyright Text </p>
+  </div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</div>
+{% endblock %}
+
+</body>
