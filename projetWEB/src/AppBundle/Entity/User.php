@@ -62,12 +62,12 @@ class User
 
     public function getIdUtilisateur()
     {
-        return $this->IdUtilisateur;
+        return $this->Idutilisateur;
     }
 
-    public function setIdUtilisateur($IdUtilisateur)
+    public function setIdUtilisateur($Idutilisateur)
     {
-        $this->IdUtilisateur = $IdUtilisateur;
+        $this->IdUtilisateur = $Idutilisateur;
     }
 
     public function getNom()
@@ -112,12 +112,12 @@ class User
 
     public function getPhraseChoc()
     {
-        return $this->PhraseChoc;
+        return $this->Phrasechoc;
     }
 
-    public function setPhraseChoc($PhraseChoc)
+    public function setPhraseChoc($Phrasechoc)
     {
-        $this->PhraseChoc = $PhraseChoc;
+        $this->Phrasechoc = $Phrasechoc;
     }
 
     public function getAvatar()
