@@ -122,7 +122,8 @@ ul {
     padding: 0;
 }
 
-#formulaireConnection {
+#formulaireConnexion {
+    display: none;
 }
 
 .container-fluid{
@@ -146,4 +147,15 @@ ul {
 
 a{
     color: white;
+}
+
+input{
+    color: black;
+}
+
+label
+{
+    display: block;
+    width: 150px;
+    float: left;
 }
