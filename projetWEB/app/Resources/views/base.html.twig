@@ -72,18 +72,16 @@
 </br>
 
 
-<form id = "formulaireConnection">
-  <p>
-   <label for="pseudo">Votre pseudo :</label>
-   <input type="text" name="pseudo" id="pseudo" value='Votre pseudo' onFocus="if (this.value=='Votre pseudo') {this.value=''}"/>
-
+<form id="formulaireConnexion" method="post" action="users">
+   <label for="email">Votre Email :</label>
+   <input type="text" name="email" id="email" />
    <br />
    <label for="pass">Votre mot de passe :</label>
    <input type="password" name="pass" id="pass" />
-
- </p>
-</form>
-</br>
+   <br>
+   <button type="submit" value="Envoyer">Envoyer</button>
+ </form>
+<a href="/register">Pas encore inscrit ?</a></br>
 </br>
 </br>
 </br>

@@ -51,22 +51,11 @@ class UserController extends Controller
       ->add('Email', TextType::class)
       ->add('save', SubmitType::class, array('label' => 'Creer un compte'))
       ->getForm();
-
-      $form->handleRequest($request);
-
-      if ($form->isSubmitted() && $form->isValid()) {
-        // $form->getData() holds the submitted values
-        // but, the original `$task` variable has also been updated
-        $task = $form->getData();
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($task);
-        $em->flush();
-
-        return $this->redirectToRoute('task_success');
-      }
+     
 
       return $this->render('test.html.twig', array(
         'form' => $form->createView(),
         ));
-    }
+}
+      
   }
