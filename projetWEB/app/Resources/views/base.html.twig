@@ -56,44 +56,53 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" class="navbar-link">Se connecter</a></li>
+        <li><a href="#" class="navbar-link" onclick="toggleForm()">Se connecter</a></li>
       </ul>
+      <form id="formulaireConnexion" method="post" action="users">
+   <label for="email">Votre Email :</label>
+   <input type="text" name="email" id="email"/>
+   <br />
+   <label for="pass">Votre mot de passe :</label>
+   <input type="password" name="pass" id="pass" onsubmit="" />
+   <button type="submit" value="Envoyer">Envoyer</button>
+   <br>  
+   <a href="/register">Pas encore inscrit ?</a></br>
+ </form>
+
     </div>
   </div>
 </nav>
 {% endblock %}
 
-{# block formulaireConnexion #}
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
 
 
-<form id="formulaireConnexion" method="post" action="users">
-   <label for="email">Votre Email :</label>
-   <input type="text" name="email" id="email" />
-   <br />
-   <label for="pass">Votre mot de passe :</label>
-   <input type="password" name="pass" id="pass" />
-   <br>
-   <button type="submit" value="Envoyer">Envoyer</button>
- </form>
-<a href="/register">Pas encore inscrit ?</a></br>
-</br>
-</br>
-</br>
-</br>
-
-{# endblock #}
 
 
-  </div>
-</div>
-<div id="content">
-</div>
+
+
+<script type="text/javascript">
+
+    function toggleForm(){
+    // on réccupère l'élément form.
+    var formulaire = document.getElementById('formulaireConnexion');
+  
+    // Condition pour afficher/cacher le formulaire en fonction de son état
+    if(formulaire.style.display == 'block'){
+        formulaire.style.display = 'none';
+    }else{
+        formulaire.style.display = 'block';
+    }
+}
+
+</script>
+
+
+
+{% block body %}
+{% endblock %}
+
+
+
 
 
 {% block footer %}
