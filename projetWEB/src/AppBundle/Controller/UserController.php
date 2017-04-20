@@ -28,8 +28,8 @@ class UserController extends Controller
       }
       else
       {
-        $session = new Session();
-        $session->set('user',$user->getPrenom());
+        $session = $request->getSession();
+        $session->set('username',$user->getPrenom());
 
        // $session->setId($user->getIdUtilisateur());
         
