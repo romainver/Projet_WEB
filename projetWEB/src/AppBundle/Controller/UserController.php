@@ -14,6 +14,17 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
 {
     /**
+     * @Route("/disconnect")
+     */
+      public function disconnect(Request $request)
+      {
+        $session = $request->getSession();
+        $session->set('username','');
+        $session->set('iduser','');
+        return $this->redirectToRoute('home');
+      }
+
+    /**
      * @Route("/users", name="users_list")
      * @Method({"POST"})
      */
@@ -74,15 +85,6 @@ class UserController extends Controller
     }
 
 
-    /**
-     * @Route("/users/disconnect", name="users_list")
-     */
-      public function disconnect(Request $request)
-      {
-        $session = $request->getSession();
-        $session->set('username','');
-        $session->set('iduser','');
-        return $this->render('home.html.twig');
-      }
+
 }
 
