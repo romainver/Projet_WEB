@@ -37,6 +37,7 @@ class activities extends Controller
       ->add('Nomactivite', TextType::class)
       ->add('Description', TextType::class)
       ->add('Dateactivite', DateType::class)
+      ->add('lienimage', TextType::class)
       ->add('save', SubmitType::class, array('label' => 'Creer une activitée'))
       ->getForm();
       $form->handleRequest($request);
@@ -62,8 +63,10 @@ class activities extends Controller
       $activity = $this->get('doctrine.orm.entity_manager')
       ->getRepository('AppBundle:Activity')
       ->findOneBy(array('Idactivite' => $request->get('id')));
-
-      return $this->render('activities.html.twig', array('activity'=>$activity));
+      $result = $activity->getDateactivite()->format('Y-m-d');
+      $dateArray = explode('-', $result);
+     
+      return $this->render('activities.html.twig', array('activity'=>$activity, 'year'=>$dateArray[0], 'month'=>$dateArray[1], 'day'=>$dateArray[2]));
     }
 
     /**
@@ -122,7 +125,9 @@ class activities extends Controller
       $activity = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Activity')
         ->findOneBy(array('Idactivite' => $request->get('id')));
-      $participant = $this->get('doctrine.orm.entity_manager')
+        if($session->get('iduser')!='')
+        {
+        $participant = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Participe')
         ->findOneBy(array('Idutilisateur' => $session->get('iduser'),'Idactivite' => $request->get('id')));
         if(is_null($participant))
@@ -133,6 +138,7 @@ class activities extends Controller
           $em = $this->get('doctrine.orm.entity_manager');
           $em->persist($newparticipant);
           $em->flush();
+          echo 'Vous êtes désormais inscrit à cette activitée';
           return $this->render('activities.html.twig', array('activity'=>$activity));
         }
         else
@@ -140,6 +146,9 @@ class activities extends Controller
           echo 'Vous êtes déjà inscrit à cette activitée';
           return $this->render('activities.html.twig', array('activity'=>$activity));
         }
+        }
+      echo 'Vous devez avoir un compte pour vous inscrire';
+          return $this->render('activities.html.twig', array('activity'=>$activity));
 
     }
 

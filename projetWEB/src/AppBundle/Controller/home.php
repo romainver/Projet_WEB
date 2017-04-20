@@ -24,8 +24,6 @@ class home extends Controller
       	$activity = $this->get('doctrine.orm.entity_manager')
       ->getRepository('AppBundle:Activity')
       ->findAll();
-
-
-        return $this->render('home.html.twig', array('activities'=>$activity));
+	  return $this->render('home.html.twig', array('activities'=>$activity));
     }
 }

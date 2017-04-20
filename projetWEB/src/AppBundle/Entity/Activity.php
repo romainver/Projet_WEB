@@ -40,6 +40,11 @@ class Activity
      */
     protected $Votecontre;
 
+     /**
+     * @ORM\Column(type="string")
+     */
+    protected $lienimage;
+
 
     public function getIdactivite()
     {
@@ -99,5 +104,15 @@ class Activity
     public function setVotecontre($Votecontre)
     {
         $this->Votecontre = $Votecontre;
+    }
+
+    public function getlienimage()
+    {
+        return $this->lienimage;
+    }
+
+    public function setlienimage($lienimage)
+    {
+        $this->lienimage = $lienimage;
     }
 }
