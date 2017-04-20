@@ -114,7 +114,6 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
 
 
 {% block body %}
-  {% set date = {{activity.getDateactivite}} | split('-') %}
   {% for activity in activities %}
   <div class="container">
     <div class="row">
@@ -122,10 +121,10 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
         <ul class="event-list">
           <li>
             <time datetime="2014-07-20">
-              <span class="day">{{date[2]}}</span>
-              <span class="month">{{date[1]}}</span>
-              <span class="year">{{date[0]}}</span>
-              <span class="time">ALL DAY</span>
+              <span class="day">{{ activity.getDateactivite|date("d") }}</span>
+              <span class="month">{{ activity.getDateactivite|date("m") }}</span>
+              <span class="year">{{ activity.getDateactivite|date("Y") }}</span>
+              <span class="time"></span>
             </time>
             <img alt="Image" src="{{ activity.lienimage }}" />
             <div class="info">
