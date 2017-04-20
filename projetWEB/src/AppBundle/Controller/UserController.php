@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
@@ -20,17 +21,21 @@ class UserController extends Controller
     {
       $user = $this->get('doctrine.orm.entity_manager')
       ->getRepository('AppBundle:User')
-      ->findOneBy(array('Email' => $_POST['email'],'Motdepasse' => $_POST['pass']));
+      ->findOneBy(array('Email' => $_POST['Email'],'Motdepasse' => $_POST['pass']));
       if(is_null($user))
       {
         echo 'pas de compte';
       }
       else
       {
-        echo 'bonjour '.$user->getPrenom();
+        $session = new Session();
+        $session->set('user',$user->getPrenom());
+
+       // $session->setId($user->getIdUtilisateur());
+        
       }
 
-      return new Response();
+      return $this->render('home.html.twig');
     }
 
 
@@ -59,7 +64,7 @@ class UserController extends Controller
          $em = $this->getDoctrine()->getManager();
          $em->persist($task);
          $em->flush();
-        return $this->redirectToRoute('home'); 
+        return $this->redirectToRoute('home');
       }
 
       return $this->render('test.html.twig', array(
