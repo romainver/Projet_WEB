@@ -30,6 +30,7 @@ class UserController extends Controller
       {
         $session = $request->getSession();
         $session->set('username',$user->getPrenom());
+        $session->set('iduser', $user->getIdUtilisateur());
 
        // $session->setId($user->getIdUtilisateur());
         
@@ -73,7 +74,15 @@ class UserController extends Controller
     }
 
 
-    
-      
+    /**
+     * @Route("/users/disconnect", name="users_list")
+     */
+      public function disconnect(Request $request)
+      {
+        $session = $request->getSession();
+        $session->set('username','');
+        $session->set('iduser','');
+        return $this->render('home.html.twig');
+      }
 }
 
