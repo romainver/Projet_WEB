@@ -5,19 +5,32 @@
 
 {% block body %}
 
-<div id = "activite">
+	<div class="descriptionActivite">
 	<ul>
-		<li>{{ activity.getNomactivite() }}</li>
-		<li>{{ activity.getDescription() }}</li>
+		<li>Nom de l'activité : {{ activity.getNomactivite() }}</li>
+		<li>Description : {{ activity.getDescription() }}</li>
 		<li>{{ activity.getVotepour() }}</li>
 		<li>{{ activity.getVotecontre() }}</li>
 
 	</ul>
+	</div>
+	
 	{% if app.session.get('hasvoted') == '' %}
-<a href="/activity/{{activity.getIdactivite()}}/up">Voter pour</a><br>
-<a href="/activity/{{activity.getIdactivite()}}/down">Voter contre</a>
-<a href="/activity/{{activity.getIdactivite()}}/register">S'inscrire</a>
-<a href="/activity/{{activity.getIdactivite()}}/addpicture"> Ajouter photo</a>
+	
+	<div class="lienactivite">
+		<div class="col-sm-4">
+			<a href="/activity/{{activity.getIdactivite()}}/up">Voter pour</a> Ou 
+			<a href="/activity/{{activity.getIdactivite()}}/down">Voter contre</a>
+		</div>
+		<div class="col-sm-4">
+			<a href="/activity/{{activity.getIdactivite()}}/register">S'inscrire</a>				
+		</div>
+		<div class="col-sm-4">
+			<a href="/activity/{{activity.getIdactivite()}}/addpicture"> Ajouter photo</a>
+		</div>
+	</div>
+	<br>
+	<br>
 	{% else %}
 		<p>A voté !</p>
 	{% endif %}
