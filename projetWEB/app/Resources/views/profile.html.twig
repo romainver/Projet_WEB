@@ -4,6 +4,18 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-	<h1>Mon profil</h1><br>
+
+	<h1>Mon profil : </h1><br>
+
+
+ <p>Bienvenue {{ user.getNom() }} {{ user.getPrenom() }} </p>
+
+ <p>Phrase choc : {{ user.getPhraseChoc() }}</p>
+
+{% if user.getCategorie() == 'moderateur' %}
+
+<p>Proposition d'activité : </p>
+
+{% endif %}
 
 {% endblock %}
