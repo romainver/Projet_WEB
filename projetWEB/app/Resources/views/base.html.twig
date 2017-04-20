@@ -60,7 +60,17 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" class="navbar-link" onclick="toggleForm()">Se connecter {% if app.session.get('username') is defined %} {{ app.session.get('username') }} {% endif %}</a></li>
+
+        {% if app.session.get('username') != '' %} 
+        <li><a href="/users/profil" class="navbar-link">Bonjour {{ app.session.get('username') }} ! </a></li>
+        <li><a href="/users/disconnect" class="navbar-link">Deconnexion </a></li>
+
+        {% else %}
+        
+        <li><a href="#" class="navbar-link" onclick="afficherForm()">Se connecter </a></li>
+
+        {% endif %}
+
       </ul>
       <form id="formulaireConnexion" method="post" action="users">
    <label for="email">Votre Email :</label>
@@ -86,7 +96,7 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
 
 <script type="text/javascript">
 
-    function toggleForm(){
+    function afficherForm(){
     // on réccupère l'élément form.
     var formulaire = document.getElementById('formulaireConnexion');
   
