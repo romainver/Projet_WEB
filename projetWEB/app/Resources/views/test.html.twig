@@ -7,10 +7,15 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-  
+
+<h1>Création activité :</h1>
+<br>
+
 {{ form_start(form) }}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{{ form_errors(form) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}
- 
-</body>
 
+
+</body>
