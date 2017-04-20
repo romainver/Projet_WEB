@@ -23,7 +23,10 @@ class clubs extends Controller
      */
     public function clubsAction()
     {
-        return $this->render('clubs.html.twig');
+        $clubs = $this->get('doctrine.orm.entity_manager')
+      ->getRepository('AppBundle:Club')
+      ->findAll();
+      return $this->render('clubs.html.twig', array('clubs'=>$clubs));
     }
 
     /**
@@ -54,5 +57,16 @@ class clubs extends Controller
       return $this->render('test.html.twig', array(
         'form' => $form->createView(),
         )); 
+    }
+
+     /**
+     * @Route("/clubs/{id}", name="display_one_club")
+     */
+    public function displayOneClub(Request $request)
+    {
+      $club = $this->get('doctrine.orm.entity_manager')
+      ->getRepository('AppBundle:Club')
+      ->findOneBy(array('Idclub' => $request->get('id')));
+      return $this->render('oneclub.html.twig', array('club'=>$club,));
     }
 }

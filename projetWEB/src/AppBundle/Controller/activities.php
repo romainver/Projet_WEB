@@ -63,10 +63,8 @@ class activities extends Controller
       $activity = $this->get('doctrine.orm.entity_manager')
       ->getRepository('AppBundle:Activity')
       ->findOneBy(array('Idactivite' => $request->get('id')));
-      $result = $activity->getDateactivite()->format('Y-m-d');
-      $dateArray = explode('-', $result);
-     
-      return $this->render('activities.html.twig', array('activity'=>$activity, 'year'=>$dateArray[0], 'month'=>$dateArray[1], 'day'=>$dateArray[2]));
+
+      return $this->render('activities.html.twig', array('activity'=>$activity));
     }
 
     /**

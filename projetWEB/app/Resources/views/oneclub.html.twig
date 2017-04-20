@@ -1,0 +1,14 @@
+{# app/Resources/views/clubs.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Club {{ club.getIdclub }}{% endblock %}
+
+	{% block body %}
+		<ul>
+			<li>{{ club.getNomclub }}</li>
+			<li>{{ club.getDescriptioncourte }}</li>
+			<li>{{ club.getDescriptionlongue }}</li>
+			<li><img src="{{club.getPhotoclub}}"></li>
+			<li>{{ club.getBudgetclub }}</li>
+		</ul>
+{% endblock %}

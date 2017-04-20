@@ -3,9 +3,27 @@
 
 {% block title %}Clubs{% endblock %}
 
-{% block body %}
-	<h1>Club 1</h1><br>
-	<h1>Club 2</h1><br>
-	<h1>Club 3</h1><br>
+	{% block body %}
+		{% for club in clubs %}
+			<div class="container">
+				<div class="row">
+					<div class="[ col-xs-12 col-sm-offset-0 col-sm-12 ]">
+						<ul class="event-list">
+							<li>
+
+								<img alt="Image" src="{{ club.getPhotoclub }}" />
+								<div class="info">
+									<h2 class="title">{{ club.getNomclub }}</h2>
+									<p>{{club.getDescriptionCourte}}</p><br>
+									<a href="/clubs/{{club.getIdclub}}">Voir plus</a>
+
+								</ul>
+							</div>            
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
 
 {% endblock %}
