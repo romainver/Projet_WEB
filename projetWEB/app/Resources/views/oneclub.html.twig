@@ -10,5 +10,10 @@
 			<li>{{ club.getDescriptionlongue }}</li>
 			<li><img src="{{club.getPhotoclub}}"></li>
 			<li>{{ club.getBudgetclub }}</li>
+			<li></li>
 		</ul>
+		<a href="/clubs/{{club.getIdclub}}/register">S'inscrire au club</a>
+		{% if errordisplay!=''%}
+		<h2>{{ errordisplay }}</h2>
+	{% endif %}
 {% endblock %}
