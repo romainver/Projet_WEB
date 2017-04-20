@@ -141,13 +141,24 @@ ul {
 
 }
 
-#navbartop{
+#navbartop {
     margin-top: 10px;
 }
 
-a{
+.nav > li > a {
     color: white;
 }
+
+#navbartop > li > a {
+    color: white;
+}
+
+form > a {
+    color: white;
+}
+
+
+
 
 input{
     color: black;
