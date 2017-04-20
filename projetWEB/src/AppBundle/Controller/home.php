@@ -21,7 +21,11 @@ class home extends Controller
         $user = $this->get('doctrine.orm.entity_manager')
       ->getRepository('AppBundle:User')
       ->findOneBy(array('Idutilisateur' => $session->get('iduser')));
+      	$activity = $this->get('doctrine.orm.entity_manager')
+      ->getRepository('AppBundle:Activity')
+      ->findAll();
 
-        return $this->render('home.html.twig');
+
+        return $this->render('home.html.twig', array('activities'=>$activity));
     }
 }

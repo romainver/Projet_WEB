@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Activity;
+use AppBundle\Entity\Participe;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,7 +21,9 @@ class activities extends Controller
      */
     public function activitiesAction()
     {
-        return $this->render('activities.html.twig');
+
+
+      return $this->render('activities.html.twig');
     }
 
     /**
@@ -39,15 +42,105 @@ class activities extends Controller
       $form->handleRequest($request);
       if($form->isSubmitted() && $form->isValid())
       {
-         $activity = $form->getData();
-         $em = $this->getDoctrine()->getManager();
-         $em->persist($activity);
-         $em->flush();
-        return $this->redirectToRoute('home'); 
+       $activity = $form->getData();
+       $em = $this->getDoctrine()->getManager();
+       $em->persist($activity);
+       $em->flush();
+       return $this->redirectToRoute('home'); 
+     }
+
+     return $this->render('test.html.twig', array(
+      'form' => $form->createView(),
+      )); 
+   }
+
+    /**
+     * @Route("/activity/{id}", name="display_one_activity")
+     */
+    public function displayOneActivity(Request $request)
+    {
+      $activity = $this->get('doctrine.orm.entity_manager')
+      ->getRepository('AppBundle:Activity')
+      ->findOneBy(array('Idactivite' => $request->get('id')));
+
+      return $this->render('activities.html.twig', array('activity'=>$activity));
+    }
+
+    /**
+     * @Route("/activity/{id}/up", name="voteup")
+     */
+    public function voteForActivity(Request $request)
+    {
+      $activity = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:Activity')
+        ->findOneBy(array('Idactivite' => $request->get('id')));
+      $session = $request->getSession();
+      if($session->get('username')!=null)
+      {
+        
+        $activity->setVotepour($activity->getVotepour()+1);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->persist($activity);
+        $em->flush();
+        $session->set('hasvoted','yes');
+        return $this->render('activities.html.twig', array('activity'=>$activity, 'hasvoted'=>'yes'));
+      }
+        echo 'Vous devez vous connecter afin de voter';
+        return $this->render('activities.html.twig', array('activity'=>$activity));
       }
 
-      return $this->render('test.html.twig', array(
-        'form' => $form->createView(),
-        )); 
+    /**
+     * @Route("/activity/{id}/down", name="votedown")
+     */
+    public function voteAgainstActivity(Request $request)
+    {
+       $activity = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:Activity')
+        ->findOneBy(array('Idactivite' => $request->get('id')));
+      $session = $request->getSession();
+      if($session->get('username')!=null)
+      {
+        $activity->setVotecontre($activity->getVotecontre()+1);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $em->persist($activity);
+        $em->flush();
+        $session->set('hasvoted','yes');
+        return $this->render('activities.html.twig', array('activity'=>$activity, 'hasvoted'=>'yes'));
+      }
+      else{
+        echo 'Vous devez vous connecter afin de voter';
+        return $this->render('activities.html.twig', array('activity'=>$activity));
+      }     
+  }
+
+   /**
+     * @Route("/activity/{id}/register", name="votedown")
+     */
+    public function registerActivity(Request $request)
+    {
+      $session = $request->getSession();
+      $activity = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:Activity')
+        ->findOneBy(array('Idactivite' => $request->get('id')));
+      $participant = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:Participe')
+        ->findOneBy(array('Idutilisateur' => $session->get('iduser'),'Idactivite' => $request->get('id')));
+        if(is_null($participant))
+        {
+          $newparticipant = new Participe();
+          $newparticipant->setIdactivite($request->get('id'));
+          $newparticipant->setIdutilisateur($session->get('iduser'));
+          $em = $this->get('doctrine.orm.entity_manager');
+          $em->persist($newparticipant);
+          $em->flush();
+          return $this->render('activities.html.twig', array('activity'=>$activity));
+        }
+        else
+        {
+          echo 'Vous êtes déjà inscrit à cette activitée';
+          return $this->render('activities.html.twig', array('activity'=>$activity));
+        }
+
     }
+
 }

@@ -21,6 +21,7 @@ class UserController extends Controller
         $session = $request->getSession();
         $session->set('username','');
         $session->set('iduser','');
+        $session->set('hasvoted', '');
         return $this->redirectToRoute('home');
       }
 
@@ -47,7 +48,7 @@ class UserController extends Controller
         
       }
 
-      return $this->render('home.html.twig');
+      return $this->redirectToRoute('home');
     }
 
 

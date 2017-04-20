@@ -7,7 +7,7 @@
   {% block stylesheets %}
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
   {% endblock %}
     
 </head>
@@ -114,6 +114,7 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
 
 
 {% block body %}
+  {% for activity in activities %}
   <div class="container">
     <div class="row">
       <div class="[ col-xs-12 col-sm-offset-0 col-sm-12 ]">
@@ -127,32 +128,19 @@ https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17973929_1460709047344100_4463989
             </time>
             <img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
             <div class="info">
-              <h2 class="title">Gala BDE</h2>
+              <h2 class="title">{{ activity.getNomactivite }}</h2>
               <ul>
-                <li style="width:100%;"><a href="#website"><span class="fa fa-globe"></span> Voir Plus</a></li>
+                <li style="width:100%;"><a href="/activity/{{activity.getIdactivite()}}"><span class="fa fa-globe"></span> Voir Plus</a></li>
               </ul>
             </div>            
           </li>
 
-          <li>
-            <time datetime="2014-07-20 0000">
-              <span class="day">8</span>
-              <span class="month">Jul</span>
-              <span class="year">2014</span>
-              <span class="time">12:00 AM</span>
-            </time>
-            <img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
-            <div class="info">
-              <h2 class="title">Rattrapage EXIA</h2>
-              <ul>
-                <li style="width:100%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
-              </ul>
-            </div>
-          </li>
+        
         </ul>
       </div>
     </div>
   </div>
+{% endfor %}
 {% endblock %}
 
 

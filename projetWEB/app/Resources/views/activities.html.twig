@@ -1,48 +1,24 @@
 {# app/Resources/views/activities.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Activitées{% endblock %}
+{% block title %}Activitée{% endblock %}
 
 {% block body %}
 
-<div class="container">
-		<div class="row">
-			<div class="[ col-xs-12 col-sm-offset-0 col-sm-12 ]">
-				<ul class="event-list">
-					<li>
-						<time datetime="2014-07-20">
-							<span class="day">4</span>
-							<span class="month">Jul</span>
-							<span class="year">2014</span>
-							<span class="time">ALL DAY</span>
-						</time>
-						<img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
-						<div class="info">
-							<h2 class="title">Gala BDE</h2>
-							<ul>
-								<li style="width:100%;"><a href="#website"><span class="fa fa-globe"></span> Voir Plus</a></li>
-							</ul>
-						</div>						
-					</li>
+<div id = "activite">
+	<ul>
+		<li>{{ activity.getNomactivite() }}</li>
+		<li>{{ activity.getDescription() }}</li>
+		<li>{{ activity.getVotepour() }}</li>
+		<li>{{ activity.getVotecontre() }}</li>
 
-					<li>
-						<time datetime="2014-07-20 0000">
-							<span class="day">8</span>
-							<span class="month">Jul</span>
-							<span class="year">2014</span>
-							<span class="time">12:00 AM</span>
-						</time>
-						<img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />
-						<div class="info">
-							<h2 class="title">Rattrapage EXIA</h2>
-							<ul>
-								<li style="width:100%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
+	</ul>
+	{% if app.session.get('hasvoted') == '' %}
+<a href="/activity/{{activity.getIdactivite()}}/up">Voter pour</a><br>
+<a href="/activity/{{activity.getIdactivite()}}/down">Voter contre</a>
+<a href="/activity/{{activity.getIdactivite()}}/register">S'inscrire</a>
+<a href="/activity/{{activity.getIdactivite()}}/addpicture"> Ajouter photo</a>
+	{% else %}
+		<p>A voté !</p>
+	{% endif %}
 {% endblock %}
