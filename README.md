@@ -6,3 +6,5 @@ Goal was to apply our courses on HTML, CSS, JSS and PHP to make a website.
 
 Here is the list of functionnalities:
 
+
+![alt text](https://github.com/romainver/Projet_WEB/blob/master/fonctionalites.png)
